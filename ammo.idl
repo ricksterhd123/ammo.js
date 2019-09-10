@@ -84,9 +84,35 @@ interface btQuaternion {
 btQuaternion implements btQuadWord;
 
 interface btMatrix3x3 {
-  void setEulerZYX(float ex, float ey, float ez);
-  void getRotation([Ref] btQuaternion q);
+  void btMatrix3x3();
+  void btMatrix3x3([Ref] btQuaternion q);
+  void btMatrix3x3(float xx, float xy, float xz, float yx, float yy, float yz, float zx, float zy, float zz); 
+  [Value] btVector3 getColumn(long x);
   [Value] btVector3 getRow(long y);
+  void setValue(float xx, float xy, float xz, float yx, float yy, float yz, float zx, float zy, float zz);
+  void setRotation([Ref] btQuaternion q);
+  void setEulerYPR(float y, float p, float r);
+  void setEulerZYX(float ex, float ey, float ez);
+  void setIdentity();
+  void getRotation([Ref] btQuaternion q);
+  void getEulerYPR(float y, float p, float r);
+  void getEulerZYX(float ex, float ey, float ez);
+  [Value] btMatrix3x3 scaled([Ref] btVector3 s);
+  float determinant();
+  [Value] btMatrix3x3 adjoint();
+  [Value] btMatrix3x3 absolute();
+  [Value] btMatrix3x3 transpose();
+  [Value] btMatrix3x3 inverse();
+  [Value] btMatrix3x3 transposeTimes([Ref] btMatrix3x3 m);
+  [Value] btMatrix3x3 timesTranspose([Ref] btMatrix3x3 m);
+  float tdotx([Ref] btVector3 v);
+  float tdoty([Ref] btVector3 v);
+  float tdotz([Ref] btVector3 v);
+  void diagonalize([Ref] btMatrix3x3 rot, float threshold, long maxSteps);
+  float cofac(long r1, long c1, long r2, long c2);
+  [Operator="*=", Ref] btMatrix3x3 op_mul([Ref] btMatrix3x3 m);
+  [Operator="+=", Ref] btMatrix3x3 op_add([Ref] btMatrix3x3 m);
+  [Operator="-=", Ref] btMatrix3x3 op_sub([Ref] btMatrix3x3 m);
 };
 
 interface btTransform {
